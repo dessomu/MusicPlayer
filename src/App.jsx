@@ -172,9 +172,7 @@ const App = () => {
               onClick={() => {setCurrentTrack(song);
                 setIsPlaying(true);
               }}
-              onTouchEnd={() => {setCurrentTrack(song);
-                setIsPlaying(true);
-              }}
+             
             >
               <span className="song-name" >{song.name.length > 38 ? song.name.slice(0,35)+"...":song.name} </span>
               <div style={{ width:"20px", height:"20px",marginRight:"10px"}}>
