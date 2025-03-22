@@ -36,8 +36,6 @@ const App = () => {
     };
   }, [isPlaying]);
   
-    
-
   // Function to handle slider change and seek audio
   const handleSeek = (e) => {
         const newTime = parseFloat(e.target.value);
@@ -46,7 +44,6 @@ const App = () => {
           setProgress(newTime);
         }
   };
-      
   //Searching for local songs and updating songsFetched with local songs
   const loadLocalSongs = async () => {
     const localSongs = await selectFolder();
@@ -56,7 +53,6 @@ const App = () => {
 
     }
   };
-
   //Fetching songs from Jamendo API
   async function getSongs(){
     try {
@@ -72,7 +68,6 @@ const App = () => {
       
     }
   }
-
   useEffect(() => {
     getSongs();
   }, [])
@@ -151,7 +146,7 @@ const App = () => {
           <img src={currentTrack?.cover || "./vite.svg"} alt="Album Cover" className="album-art" />
           <div className="text">
             <p className="small">Single</p>
-            <h1 className="title">{currentTrack?.name}</h1>
+            <h1 className="title">{currentTrack?.name.length > 18 ? currentTrack?.name.slice(0,18)+"...":currentTrack?.name}</h1>
             <p className="details">{currentTrack?.album || "artist"}</p>
           </div>
         </div>
@@ -177,8 +172,11 @@ const App = () => {
               onClick={() => {setCurrentTrack(song);
                 setIsPlaying(true);
               }}
+              onTouchEnd={() => {setCurrentTrack(song);
+                setIsPlaying(true);
+              }}
             >
-              <span style={{minWidth:"250px",maxWidth:"250px",marginLeft:"10px"}}>{song.name} </span>
+              <span className="song-name" >{song.name.length > 38 ? song.name.slice(0,35)+"...":song.name} </span>
               <div style={{ width:"20px", height:"20px",marginRight:"10px"}}>
                  <Lottie style={{display:currentTrack.name === song.name?  "block":"none"}} animationData={animationData} loop={isPlaying?true:false} />
               </div>
@@ -187,6 +185,10 @@ const App = () => {
           ))}
         </div>
       </main>
+
+      <div className="secondary-content">
+        <img src={currentTrack?.cover || "./vite.svg"} alt="Album Cover" className="cover-art" />
+      </div>
 
       {/* Bottom Player */}
       <footer className="footer">
@@ -199,13 +201,6 @@ const App = () => {
         onChange={handleSeek}
         className="progress-slider"
        />
-        <div className="now-playing">
-          <img src={currentTrack?.cover  || "./vite.svg"} alt="Now Playing" className="playing-art" />
-          <div className="text">
-            <p className="song-title">{currentTrack?.name}</p>
-            <p className="artist">{currentTrack?.album || "artist"}</p>
-          </div>
-        </div>
         <div className="player-controls">
           <Repeat className={`control-icon ${isRepeat ? "active" : ""}`} onClick={() => setIsRepeat(!isRepeat)} />
           <button className="skip-btn" onClick={prevSong}><SkipBack/></button>
