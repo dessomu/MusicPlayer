@@ -72,16 +72,6 @@ const App = () => {
     getSongs();
   }, [])
 
-  useEffect(() => {
-    document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
-     url(${currentTrack?.cover || "./vite.svg"})`;
-    document.body.style.backgroundSize = "contain";
-    document.body.style.backgroundPositionX= "right";
-    return () => {
-      document.body.style.backgroundImage = ""; // Reset on unmount if needed
-    };
-  }, [currentTrack]);
-
   //crating a new Howl instance for the current track and playing the audio
   useEffect(() => {
     if (!currentTrack || !currentTrack.audio) return;
