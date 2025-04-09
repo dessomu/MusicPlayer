@@ -12,7 +12,7 @@ body{
   width: 100vw;
   display: flex;
   height: 100dvh;
-  background: linear-gradient(to bottom right, #1e3a8a, #111827);
+  // background: linear-gradient(to bottom right, #1e3a8a, #111827);
   color: white;
 
   /* Sidebar */
@@ -47,7 +47,10 @@ body{
   /* Main Content */
   .main-content {
     flex: 1;
+    height: 100%;
     padding: 40px;
+   display: flex;
+    flex-direction: column;
 
     /* Album Info */
     .album-info {
@@ -120,6 +123,7 @@ body{
     .song-list {
       margin-top: 30px;
       max-height: 420px;
+      // max-width: 70%;
       overflow-y: auto;
 
       .header {
@@ -158,14 +162,16 @@ body{
       }
     }
   }
-.secondary-content{
+
+  .secondary-content{
     flex: 1;
     height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
+    padding: 20px;
     .cover-art{
-      margin-top: 140px;
       width: 400px;
       height: 400px;
       border-radius: 10px;
@@ -176,7 +182,6 @@ body{
       z-index: 1;
     }
   }
-
 
   /* Footer */
   .footer {
@@ -252,6 +257,32 @@ body{
 }
 
 /* Responsive Design */
+@media (max-width: 1024px){
+  .music-player{
+    .main-content{
+     justify-content: center;
+     gap: 2rem;
+    }
+  }
+
+}
+@media (max-width: 970px){
+  .music-player{
+    .main-content{
+     justify-content: center;
+     gap: 2rem;
+    }
+    .secondary-content{
+      align-items: center;
+      padding: 0 1rem 0 0;
+      .cover-art{
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }
+
+}
 @media (max-width: 768px) {
   .music-player {
     flex-direction: column;
@@ -261,14 +292,15 @@ body{
     }
 
     .main-content {
-      padding: 2rem;
+      padding: 2rem 1rem;
+      justify-content: space-around;
       .album-info {
         flex-direction: column;
         text-align: center;
 
         .album-art {
-          width: 80px;
-          height: 80px;
+          width: 130px;
+          height: 130px;
         }
 
         .text {
@@ -279,9 +311,7 @@ body{
       }
 
       .controls {
-        gap: 50px;
-        justify-content: center;
-
+        justify-content: space-around;
         .downloaded {
           position: static;
           margin-top: 10px;
@@ -305,7 +335,7 @@ body{
 
       .progress-slider {
         width: 80%;
-        top: 10px;
+        top: 1rem;
       }
 
       .player-controls {
@@ -338,8 +368,13 @@ body{
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      align-items: center;
       padding-bottom: 100px;
       .album-info {
+        .album-art{
+          width: 100px;
+          height: 100px;
+        }
         .text {
           .title {
             font-size: 1rem;
@@ -351,6 +386,7 @@ body{
       }
 
       .controls {
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -384,10 +420,15 @@ body{
       padding: 0.5rem;
      position: fixed;
      bottom: 0px;
+     .progress-slider{
+      top: 0.9rem;
+     }
       .player-controls {
         .skip-btn,
         .play-pause {
           padding: 0.3rem;
+          color: white;
+          // background-color: white;
         }
       }
 
